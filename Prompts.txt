@@ -1,0 +1,28 @@
+Create a `src/utils/errorHandler.js` in React:
+- Export a function `handleError(error)` that maps different error types to HTTP status codes:
+  - ValidationError-400
+  - BusinessError -422
+  - SystemError - 500
+  - Generic Error - 500
+- Return a consistent object: { timestamp, status, message, details }.
+- Log errors to the console for debugging.
+
+Create `ValidationError`, `BusinessError`, `SystemError` in `src/errors/index.js`:
+- Extend JavaScript Error class.
+- Accept message and optional details.
+
+Create `src/api/httpClient.js` using Axios:
+- Configure base URL and timeout.
+- Intercept responses and errors.
+- On error, call `handleError` to return normalized error object.
+- Export the configured Axios instance.
+
+Create `src/components/ErrorBoundary.jsx`:
+- Catch JavaScript errors in the component tree using `componentDidCatch`.
+- Render fallback UI with user-friendly message.
+
+Create `src/hooks/useApi.js`:
+- Wrap any API call in try/catch.
+- Use `handleError` to normalize errors.
+- Provide loading, data, and error states.
+
